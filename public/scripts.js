@@ -1,16 +1,32 @@
-// TOOD: add throttle/debounce
-// function trail(e) {
-//   const $div = document.createElement('div');
+const $cursor = document.documentElement;
+let waitUntil = null;
 
-//   $div.classList.add('trail');
+function glow(e) {
+  $cursor.style.setProperty('--x', e.clientX + 'px');
+  $cursor.style.setProperty('--y', e.clientY + 'px');
+}
 
-//   Object.assign($div.style, {
-//     top: e.pageY + 'px',
-//     left: e.pageX + 'px',
-//   });
+function trail(e) {
+  const $div = document.createElement('div');
 
-//   document.body.appendChild($div);
-//   setTimeout(() => document.body.removeChild($div), 500);
-// }
+  $div.classList.add('trail');
 
-// addEventListener('mousemove', trail);
+  Object.assign($div.style, {
+    top: e.pageY + 'px',
+    left: e.pageX + 'px',
+  });
+
+  document.body.appendChild($div);
+  setTimeout(() => document.body.removeChild($div), 500);
+}
+
+function throttledActions(e) {
+  if (Date.now() >= waitUntil) {
+    glow(e);
+    // trail(e);
+
+    waitUntil = Date.now() + 1000 / 100;
+  }
+}
+
+addEventListener('mousemove', throttledActions);

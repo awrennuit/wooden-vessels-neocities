@@ -180,7 +180,7 @@ section:not(:last-child) {
   width: max-content;
 }
 
-/* cursor trail */
+/* cursor effects */
 /* .trail {
   animation: 0.5s trailFade ease;
   background-color: var(--link-hover);
@@ -191,23 +191,34 @@ section:not(:last-child) {
   opacity: 0.6;
   position: absolute;
   width: 0.5rem;
+  z-index: -1;
 }
 
 @keyframes trailFade {
   0% {
-    background-color: var(--link);
     opacity: 0.6;
   }
   33% {
-    background-color: var(--link);
     opacity: 0.4;
   }
   66% {
-    background-color: var(--link-hover);
     opacity: 0.2;
   }
   100% {
-    background-color: var(--link-hover);
     opacity: 0;
   }
 } */
+
+.glow {
+  background: radial-gradient(
+    circle at var(--x) var(--y),
+    transparent 5%,
+    rgba(0, 0, 0, 0.3) 30%
+  );
+  height: 100vh;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+}
+/* end cursor effects */
